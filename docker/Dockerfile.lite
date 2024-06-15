@@ -17,7 +17,7 @@ RUN  ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && pip install --upgrade pip setuptools wheel \
     && pip install cython \
-    && pip install -r https://raw.githubusercontent.com/shancw96/nas-tools/v2.9.1-e3a43d4/requirements.txt \
+    && pip install -r https://raw.githubusercontent.com/escapeWu/nas-tools/v2.9.1-e3a43d4/requirements.txt \
     && npm install pm2 -g \
     && apk del --purge libffi-dev gcc musl-dev libxml2-dev libxslt-dev \
     && pip uninstall -y cython \

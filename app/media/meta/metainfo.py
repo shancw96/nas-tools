@@ -7,6 +7,7 @@ from app.media.meta.metaanime import MetaAnime
 from app.media.meta.metavideo import MetaVideo
 from app.utils.types import MediaType
 from config import RMT_MEDIAEXT
+from app.media.meta.llmparse import OpenAIParser
 
 
 def MetaInfo(title, subtitle=None, mtype=None):
@@ -19,6 +20,22 @@ def MetaInfo(title, subtitle=None, mtype=None):
     """
 
     # 应用自定义识别词
+    api_key = os.environ.get('OPENAI_API_KEY')
+    api_base = os.environ.get('OPENAI_API_BASE')
+    api_model = os.environ.get('OPENAI_API_MODEL')
+    try:
+
+        chat = OpenAIParser(
+            api_key=api_key,
+            api_base=api_base,
+            model=api_model,
+        )
+        title = chat.parse(title)
+        print(f'format title with {api_model}: ---> {title}')
+    except Exception as e:
+        print(api_key, api_base, api_model)
+        print('OPENAI API ERROR', e)
+
     title, msg, used_info = WordsHelper().process(title)
     if subtitle:
         subtitle, _, _ = WordsHelper().process(subtitle)

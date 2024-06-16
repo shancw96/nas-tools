@@ -14,6 +14,10 @@ from pathlib import Path
 from threading import Lock
 from urllib import parse
 
+import mimetypes
+mimetypes.add_type('application/javascript', '.js')
+mimetypes.add_type('text/css', '.css')
+
 from flask import Flask, request, json, render_template, make_response, session, send_from_directory, send_file
 from flask_compress import Compress
 from flask_login import LoginManager, login_user, login_required, current_user

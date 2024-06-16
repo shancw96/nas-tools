@@ -146,10 +146,11 @@ class SystemUtils:
         移动
         """
         try:
-            tmp_file = os.path.normpath(os.path.join(os.path.dirname(src),
-                                                     os.path.basename(dest)))
-            shutil.move(os.path.normpath(src), tmp_file)
-            shutil.move(tmp_file, os.path.normpath(dest))
+            # tmp_file = os.path.normpath(os.path.join(os.path.dirname(src),
+            #                                          os.path.basename(dest)))
+            # shutil.move(os.path.normpath(src), tmp_file)
+            # shutil.move(tmp_file, os.path.normpath(dest))
+            shutil.move(os.path.normpath(src), os.path.normpath(dest))
             return 0, ""
         except Exception as err:
             ExceptionUtils.exception_traceback(err)

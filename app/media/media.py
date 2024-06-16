@@ -796,7 +796,7 @@ class Media:
                         model=api_model,
                     )
                     file_name = chat.parse(file_name).content
-                    log.info(f'[LLM FORMAT]format file_name with {api_model}: ---> {file_name}')
+                    log.info("【Rmt】LLM reformat：%s => %s ..." % (api_model, file_name))
                 except Exception as e:
                     print(api_key, api_base, api_model)
                     print('OPENAI API ERROR', e)

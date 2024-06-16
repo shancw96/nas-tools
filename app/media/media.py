@@ -8,6 +8,7 @@ from functools import lru_cache
 import zhconv
 from lxml import etree
 
+from app.media.meta.llmparse import OpenAIParser
 import log
 from app.helper import MetaHelper
 from app.media.meta.metainfo import MetaInfo
@@ -783,6 +784,23 @@ class Media:
                 # 解析媒体名称
                 # 先用自己的名称
                 file_name = os.path.basename(file_path)
+                # 应用自定义识别词
+                api_key = os.environ.get('OPENAI_API_KEY')
+                api_base = os.environ.get('OPENAI_API_BASE')
+                api_model = os.environ.get('OPENAI_API_MODEL')
+                try:
+
+                    chat = OpenAIParser(
+                        api_key=api_key,
+                        api_base=api_base,
+                        model=api_model,
+                    )
+                    file_name = chat.parse(file_name).content
+                    log.info(f'[LLM FORMAT]format file_name with {api_model}: ---> {file_name}')
+                except Exception as e:
+                    print(api_key, api_base, api_model)
+                    print('OPENAI API ERROR', e)
+
                 parent_name = os.path.basename(os.path.dirname(file_path))
                 parent_parent_name = os.path.basename(PathUtils.get_parent_paths(file_path, 2))
                 # 过滤掉蓝光原盘目录下的子文件

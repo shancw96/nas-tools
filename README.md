@@ -4,6 +4,7 @@
 
 已调整功能如下：
 + 增加大语言模型 优化重命名逻辑：阿里云盘的资源，命名不规范，所以借助 大语言模型 如 llama3-70b 格式化文件名，从而大大提升识别精度。
+  + https://github.com/escapeWu/nas-tools/blob/v2.9.1-e3a43d4/app/media/meta/llmparse.py  
   + 使用方式，配置三个系统环境变量，推荐使用 [openrouter](https://openrouter.ai/models):
       - OPENAI_API_KEY=sk-or-v1-xxxx
       - OPENAI_API_BASE=https://openrouter.ai/api/v1        

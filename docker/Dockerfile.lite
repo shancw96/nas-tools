@@ -17,7 +17,7 @@ RUN  ln -sf /usr/share/zoneinfo/${TZ} /etc/localtime \
     && ln -sf /usr/bin/python3 /usr/bin/python \
     && pip install --upgrade pip setuptools wheel \
     && pip install cython \
-    && pip install -r https://raw.githubusercontent.com/escapeWu/nas-tools/v2.9.1-e3a43d4/requirements.txt \
+    && pip install -r https://raw.githubusercontent.com/escapeWu/nas-tools/master/requirements.txt \
     && npm install pm2 -g \
     && apk del --purge libffi-dev gcc musl-dev libxml2-dev libxslt-dev \
     && pip uninstall -y cython \
@@ -42,7 +42,7 @@ RUN python_ver=$(python3 -V | awk '{print $2}') \
     && echo 'fs.inotify.max_user_watches=524288' >> /etc/sysctl.conf \
     && echo 'fs.inotify.max_user_instances=524288' >> /etc/sysctl.conf \
     && git config --global pull.ff only \
-    && git clone -b v2.9.1-e3a43d4 ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
+    && git clone -b master ${REPO_URL} ${WORKDIR} --depth=1 --recurse-submodule \
     && git config --global --add safe.directory ${WORKDIR}
 EXPOSE 3000
 VOLUME ["/config"]
